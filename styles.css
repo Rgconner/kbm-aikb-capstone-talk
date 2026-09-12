@@ -1,0 +1,400 @@
+/* KBM & AIKB — capstone talk companion
+   Palette and type are drawn from the actual subject: KanBanMan's own
+   card data uses literal Carbon Design System tokens (layer-01,
+   layer-accent-01), and Carbon's own typeface is IBM Plex. This site
+   borrows that real visual language rather than inventing one. */
+
+:root {
+  --bg: #f2f4f8;
+  --surface: #ffffff;
+  --surface-sunken: #e8ecf3;
+  --border: #d0d7e2;
+  --ink: #161616;
+  --ink-muted: #525252;
+  --ink-faint: #6f6f6f;
+  --accent: #0f62fe;
+  --accent-ink: #ffffff;
+  --accent-wash: #edf3ff;
+  --wart: #da1e28;
+  --wart-wash: #fff1f1;
+  --good: #24a148;
+  --good-wash: #edfaf1;
+  --focus: #0f62fe;
+  --shadow: 0 2px 6px rgba(22, 22, 22, 0.08), 0 1px 2px rgba(22, 22, 22, 0.06);
+  --radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161616;
+    --surface: #262626;
+    --surface-sunken: #1f1f1f;
+    --border: #3d3d3d;
+    --ink: #f4f4f4;
+    --ink-muted: #a8a8a8;
+    --ink-faint: #8d8d8d;
+    --accent: #4589ff;
+    --accent-ink: #0d1117;
+    --accent-wash: #1c2a45;
+    --wart: #fa4d56;
+    --wart-wash: #3a1a1c;
+    --good: #42be65;
+    --good-wash: #16281c;
+    --focus: #4589ff;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #161616;
+  --surface: #262626;
+  --surface-sunken: #1f1f1f;
+  --border: #3d3d3d;
+  --ink: #f4f4f4;
+  --ink-muted: #a8a8a8;
+  --ink-faint: #8d8d8d;
+  --accent: #4589ff;
+  --accent-ink: #0d1117;
+  --accent-wash: #1c2a45;
+  --wart: #fa4d56;
+  --wart-wash: #3a1a1c;
+  --good: #42be65;
+  --good-wash: #16281c;
+  --focus: #4589ff;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+* { box-sizing: border-box; }
+
+html { color-scheme: light dark; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+code, .mono, .card-id, .tag-chip, .field-name {
+  font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+h1, h2, h3, h4 { text-wrap: balance; font-weight: 600; letter-spacing: -0.01em; }
+
+a { color: var(--accent); }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ---------- Shell layout ---------- */
+
+.shell {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  grid-template-rows: 56px 1fr;
+  grid-template-areas:
+    "topbar topbar"
+    "nav main";
+  min-height: 100vh;
+}
+
+.topbar {
+  grid-area: topbar;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-inline: 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar .brand {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.topbar .brand .divider { color: var(--ink-faint); margin: 0 8px; font-weight: 400; }
+
+.crumb {
+  color: var(--ink-muted);
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crumb .sep { margin: 0 6px; color: var(--ink-faint); }
+
+.theme-toggle {
+  margin-left: auto;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink-muted);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--ink); border-color: var(--ink-faint); }
+
+.nav {
+  grid-area: nav;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 16px 0;
+  overflow-y: auto;
+}
+
+.nav-section { margin-bottom: 4px; }
+
+.nav-section-title {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 10px 20px 6px;
+  cursor: default;
+}
+
+.nav-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink-muted);
+  padding: 8px 17px;
+  cursor: pointer;
+}
+
+.nav-item:hover { background: var(--surface-sunken); color: var(--ink); }
+
+.nav-item.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: var(--accent-wash);
+  font-weight: 500;
+}
+
+.nav-item .n { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--ink-faint); min-width: 1.4em; }
+.nav-item.active .n { color: var(--accent); }
+
+.main {
+  grid-area: main;
+  padding: 32px clamp(20px, 4vw, 56px) 80px;
+  max-width: 1100px;
+}
+
+/* ---------- Card rail (subtopic picker) ---------- */
+
+.rail {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.rail-card {
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.12s, box-shadow 0.12s, transform 0.12s;
+}
+
+.rail-card:hover { border-color: var(--accent); box-shadow: var(--shadow); transform: translateY(-1px); }
+
+.rail-card.selected { border-color: var(--accent); background: var(--accent-wash); }
+
+.rail-card .rail-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.rail-card.tone-wart .rail-eyebrow { color: var(--wart); }
+.rail-card.tone-good .rail-eyebrow { color: var(--good); }
+.rail-card.tone-pending .rail-eyebrow { color: var(--ink-faint); }
+
+.rail-card .rail-title { font-size: 15px; font-weight: 600; }
+.rail-card .rail-dek { font-size: 13px; color: var(--ink-muted); line-height: 1.4; }
+
+.rail-card.pending { border-style: dashed; opacity: 0.85; }
+
+/* ---------- Article / detail body ---------- */
+
+.article { max-width: 68ch; }
+
+.article .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.article .eyebrow.wart { color: var(--wart); }
+.article .eyebrow.good { color: var(--good); }
+
+.article h2 { font-size: 26px; margin: 0 0 4px; }
+.article .dek { color: var(--ink-muted); font-size: 16px; margin: 0 0 24px; }
+
+.article p { margin: 0 0 16px; }
+.article ul, .article ol { margin: 0 0 16px; padding-left: 1.3em; }
+.article li { margin-bottom: 6px; }
+
+.callout {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-wash);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 20px 0;
+  font-size: 14px;
+}
+.callout.wart { border-left-color: var(--wart); background: var(--wart-wash); }
+.callout.good { border-left-color: var(--good); background: var(--good-wash); }
+.callout .callout-label { font-weight: 600; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.callout.wart .callout-label { color: var(--wart); }
+.callout.good .callout-label { color: var(--good); }
+.callout:not(.wart):not(.good) .callout-label { color: var(--accent); }
+
+.pending-box {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  color: var(--ink-muted);
+  font-size: 14px;
+  background: var(--surface-sunken);
+}
+.pending-box strong { color: var(--ink); }
+
+pre {
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-size: 12.5px;
+  line-height: 1.5;
+  margin: 0 0 20px;
+}
+
+table { border-collapse: collapse; width: 100%; margin: 0 0 20px; font-size: 13.5px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-faint); font-weight: 600; }
+.tbl-wrap { overflow-x: auto; margin-bottom: 20px; }
+
+.tag-yes { color: var(--good); font-weight: 600; }
+.tag-no { color: var(--ink-faint); }
+
+/* ---------- Diagrams ---------- */
+
+figure.diagram {
+  margin: 24px 0 28px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+figure.diagram svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+
+figure.diagram figcaption {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+.diag-hot {
+  cursor: pointer;
+}
+.diag-hot rect, .diag-hot polygon {
+  transition: fill 0.12s, stroke 0.12s;
+}
+.diag-hot:hover rect, .diag-hot:hover polygon {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.diag-hot.active rect, .diag-hot.active polygon {
+  fill: var(--accent-wash);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.diag-detail {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: var(--accent-wash);
+  border-radius: var(--radius);
+  font-size: 13.5px;
+  border-left: 3px solid var(--accent);
+  display: none;
+}
+.diag-detail.visible { display: block; }
+.diag-detail strong { display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent); }
+
+.progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.progress button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 9px 16px;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--ink);
+  cursor: pointer;
+}
+.progress button:hover { border-color: var(--accent); color: var(--accent); }
+.progress button:disabled { opacity: 0.35; cursor: default; }
+.progress button:disabled:hover { border-color: var(--border); color: var(--ink); }
+
+@media (max-width: 860px) {
+  .shell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "topbar"
+      "nav"
+      "main";
+  }
+  .nav { border-right: none; border-bottom: 1px solid var(--border); max-height: 220px; }
+  .main { padding: 24px 16px 60px; }
+}
