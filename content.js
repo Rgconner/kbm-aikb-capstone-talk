@@ -298,22 +298,6 @@ const SECTIONS = [
         `,
       },
       {
-        id: "aikb-russ-take",
-        eyebrow: "Perspective &mdash; pending",
-        title: "Russ's take: coworkers, not tools",
-        dek: "Why the functional independence is the point",
-        pending: true,
-        body: `
-          <div class="pending-box">
-            <strong>Reserved for Russ's own write-up.</strong> Working thesis to build from:
-            because these AI agents <em>function</em> like independent programs &mdash; and,
-            in practice, like coworkers &mdash; treating them that way (structured handoffs,
-            independent proposals, a human arbitrating disagreement) rather than as
-            interchangeable tools is itself where a system like AIKB earns its value.
-          </div>
-        `,
-      },
-      {
         id: "aikb-claude-take",
         eyebrow: "Perspective",
         title: "My honest take, as the AI on the other end of the board",
@@ -345,6 +329,22 @@ const SECTIONS = [
           agree on, what only one of them thought of, and where they've quietly broken a shared
           rule. It was never going to be good at deciding what the product should do, and it
           didn't try to be.</p>
+        `,
+      },
+      {
+        id: "aikb-russ-take",
+        eyebrow: "Perspective &mdash; pending",
+        title: "Russ's take: coworkers, not tools",
+        dek: "Why the functional independence is the point",
+        pending: true,
+        body: `
+          <div class="pending-box">
+            <strong>Reserved for Russ's own write-up.</strong> Working thesis to build from:
+            because these AI agents <em>function</em> like independent programs &mdash; and,
+            in practice, like coworkers &mdash; treating them that way (structured handoffs,
+            independent proposals, a human arbitrating disagreement) rather than as
+            interchangeable tools is itself where a system like AIKB earns its value.
+          </div>
         `,
       },
     ],
