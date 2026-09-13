@@ -317,6 +317,14 @@ th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: 
 .tag-yes { color: var(--good); font-weight: 600; }
 .tag-no { color: var(--ink-faint); }
 
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.bold { font-weight: 700; }
+.accent { color: var(--accent); }
+tr.bold td { font-weight: 700; }
+tr.accent td { color: var(--accent); }
+.muted { color: var(--ink-faint); font-size: 12px; }
+td.muted { font-size: 12.5px; font-style: italic; }
+
 /* ---------- Diagrams ---------- */
 
 figure.diagram {

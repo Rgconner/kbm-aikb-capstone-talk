@@ -343,4 +343,97 @@ const SECTIONS = [
       },
     ],
   },
+  {
+    id: "appendix",
+    label: "Appendices",
+    dek: "Numbers behind the talk, with their limits stated up front",
+    topics: [
+      {
+        id: "appendix-a-cost",
+        eyebrow: "Appendix",
+        title: "Appendix A. Cost comparison of Human/AI team vs IBM Client Engineering team",
+        dek: "38.9× is real — here's exactly what it does and doesn't prove",
+        body: `
+          <p>This is the "so what" for the AIKB platform itself, scoped narrowly on purpose:
+          what would it have cost an IBM Client Engineering team to build what Bob and Russ
+          built across the AIKB project, versus what it actually cost. It does not price the
+          KanBanMan work covered elsewhere on this page &mdash; that's a separate repo, built
+          separately, and left out of this estimate entirely.</p>
+
+          <h3 style="font-size:14px;margin:22px 0 8px">Rate and hours basis</h3>
+          <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Input</th><th>Value</th><th>Source</th></tr></thead>
+            <tbody>
+              <tr><td>Senior Developer</td><td class="mono">~$185/hr</td><td rowspan="4">Industry-standard blended rate, IBM Client Engineering team mix</td></tr>
+              <tr><td>DevOps / Infrastructure</td><td class="mono">~$165/hr</td></tr>
+              <tr><td>QA Engineer</td><td class="mono">~$120/hr</td></tr>
+              <tr><td>Architect</td><td class="mono">~$200/hr</td></tr>
+              <tr><td>Human time (actual)</td><td class="mono">45 hrs</td><td>Russ's stated time across the full project arc &mdash; planning, review, Claude collaboration, and KanBanMan demo work. Chosen over the git-derived active-time figure (~8.6 hrs through Session W) as the more defensible, honest denominator for a full talk.</td></tr>
+            </tbody>
+          </table>
+          </div>
+
+          <h3 style="font-size:14px;margin:22px 0 8px">Equivalent professional effort, by work item</h3>
+          <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Work Item</th><th>Phase</th><th>Size</th><th class="num">Est. Hours</th><th class="num">Market Cost</th></tr></thead>
+            <tbody>
+              <tr><td>Project scaffold, schema design, ORM</td><td>Build</td><td>M</td><td class="num">61</td><td class="num">$9,760</td></tr>
+              <tr><td>Board API (FastAPI REST, all endpoints)</td><td>Build</td><td>M</td><td class="num">41</td><td class="num">$6,560</td></tr>
+              <tr><td>Python + RPGLE static analysers</td><td>Build</td><td>L+M</td><td class="num">125</td><td class="num">$20,000</td></tr>
+              <tr><td>Bootstrap tools (BTT + generic + remote clone)</td><td>Build</td><td>M</td><td class="num">61</td><td class="num">$9,760</td></tr>
+              <tr><td>React/Vite/Carbon UI (3 views + auth gate)</td><td>Build</td><td>L</td><td class="num">84</td><td class="num">$13,440</td></tr>
+              <tr><td>k8s deploy (Dockerfile, manifests, IngressRoutes)</td><td>Deploy</td><td>M</td><td class="num">41</td><td class="num">$6,560</td></tr>
+              <tr><td>Security hardening (P0 fixes &mdash; 8 items)</td><td>Build</td><td>M</td><td class="num">41</td><td class="num">$6,560</td></tr>
+              <tr><td>Postgres migration + Alembic</td><td>Build</td><td>M</td><td class="num">41</td><td class="num">$6,560</td></tr>
+              <tr><td>Multi-agent identity + Caller table + 3-tier auth</td><td>Build</td><td>L</td><td class="num">84</td><td class="num">$13,440</td></tr>
+              <tr><td>Model backend matrix + LLM integration</td><td>Build</td><td>M</td><td class="num">41</td><td class="num">$6,560</td></tr>
+              <tr><td>OCC + audit trail + protocol fixes (Alpha)</td><td>Build</td><td>M</td><td class="num">41</td><td class="num">$6,560</td></tr>
+              <tr><td>Test suite (233 tests across 6 modules)</td><td>QA</td><td>L</td><td class="num">60</td><td class="num">$7,200</td></tr>
+              <tr><td>Documentation (CONTEXT.md, AGENT_SKILL.md, README)</td><td>Docs</td><td>M</td><td class="num">20</td><td class="num">$3,700</td></tr>
+              <tr class="bold"><td colspan="3">Base total</td><td class="num">741 hrs</td><td class="num">$116,660</td></tr>
+              <tr><td colspan="3" class="muted">+20% contingency (standard for integration-heavy projects)</td><td class="num">+148 hrs</td><td class="num">+$23,332</td></tr>
+              <tr class="bold accent"><td colspan="3">Adjusted total</td><td class="num">889 hrs</td><td class="num">$139,992</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <p class="muted" style="margin-top:-8px">Tier sizes (XS/S/M/L) and hour estimates come from
+          the WBS tier table in <code>aikb/tools/data/wbs_tiers.json</code>, applied per work item by
+          scope and complexity. The RPGLE scanner and repo-estimation tool carry L-tier weight as
+          domain-specific, edge-case-heavy work.</p>
+
+          <div class="callout green">
+            <p><strong>The headline comparison:</strong> $139,992 equivalent professional cost
+            (market blended + 20% contingency) against roughly $3,600 actual cost (45 hrs at
+            Architect rate, plus about $150 in AI tokens) &mdash; a <strong>38.9&times;</strong>
+            multiplier on human time.</p>
+          </div>
+
+          <div class="callout wart">
+            <span class="callout-label">Held with &plusmn;25% confidence, on purpose</span>
+            <p style="margin-bottom:8px">The WBS tier assignments were authored by Bob and applied
+            to Bob's own work. That's self-assessment, not independent verification. The tier
+            calls are reasonable and defensible, but a neutral estimator might score some items
+            differently.</p>
+            <p style="margin-bottom:8px">The choice of denominator matters more than it looks: using
+            the git-derived active-time figure (~8.6 hrs) instead of the 45 hrs stated-time figure
+            produces a range of 53&times;&ndash;1,568&times; depending on which hours number you
+            pick. 38.9&times; is deliberately the most conservative defensible number in that range,
+            not the most impressive one &mdash; it's the one you can stand behind in a room.</p>
+            <p style="margin-bottom:0">The order of magnitude is real. The specific number should
+            be held loosely.</p>
+          </div>
+
+          <div class="callout">
+            <span class="callout-label">What this estimate does not include</span>
+            <p style="margin-bottom:0">The KanBanMan demo work (separate repo, built by Claude),
+            the Workbench positioning conversations, the OU talk preparation itself, and any time
+            Claude spent that wasn't captured in the AIKB git log. All of that is real project time
+            that happened outside the scope this number is measuring.</p>
+          </div>
+        `,
+      },
+    ],
+  },
 ];
