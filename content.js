@@ -104,6 +104,12 @@ const SECTIONS = [
           tag variance client-side &mdash; and one has &mdash; but that logic lives in the
           host page, not the engine. It's the same discipline as <code>desk</code>: the engine
           gives you a well-shaped primitive and refuses to guess what you'll do with it.</p>
+          <p>One more query param lives at that same DB layer: an optional <code>limit</code>,
+          capping how many cards a request returns. It's real, and it composes with the tag
+          filtering above &mdash; but it isn't built to "true data mapper" precision. It doesn't
+          report how many cards matched before trimming, only what it hands back. If a caller
+          needs to know it's looking at a partial result, KanBanMan won't tell it that on its
+          own; the engine trusts the caller to already know what it asked for.</p>
         `,
       },
       {
