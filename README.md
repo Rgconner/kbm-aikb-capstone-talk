@@ -1,7 +1,7 @@
 # KanBanMan & AIKB — Capstone Talk
 
 Companion site for a talk given to a Masters CS capstone class: an honest
-engineering overview of the [KanBanMan](https://git.snwbd.com/aikb-admin/kanbanman)
+engineering overview of the KanBanMan
 kanban engine, and a real case study of AI-to-AI collaboration via the AIKB
 knowledge board — including the friction, not just the wins.
 
